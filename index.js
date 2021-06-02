@@ -8,6 +8,16 @@ const app = new App({
   appToken: process.env.APP_TOKEN,
 });
 
+app.command('/affirm', async ({ command, ack, say }) => {
+  try {
+    await ack();
+    say('Yaaay! that command works!');
+  } catch (error) {
+    console.log('err');
+    console.error(error);
+  }
+});
+
 (async () => {
   const port = 5633;
   await app.start(process.env.PORT || port);
