@@ -8,9 +8,10 @@ const app = new App({
   appToken: process.env.APP_TOKEN,
 });
 
-app.command('/knowledge', async ({ command, ack, say }) => {
+app.command('/affirm', async ({ command, ack, say }) => {
   try {
     await ack();
+
     say('Yaaay! that command works!');
   } catch (error) {
     console.log('err');
@@ -18,7 +19,7 @@ app.command('/knowledge', async ({ command, ack, say }) => {
   }
 });
 
-app.message('hey', async ({ command, say }) => {
+app.message(/affirm/, async ({ command, say }) => {
   try {
     say('Yaaay! that command works!');
   } catch (error) {
