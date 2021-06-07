@@ -4,11 +4,21 @@ const { App } = require('@slack/bolt');
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
+  socketMode: true,
+  appToken: process.env.APP_TOKEN,
 });
 
-app.command('/affirm', async ({ command, ack, say }) => {
+app.command('/knowledge', async ({ command, ack, say }) => {
   try {
     await ack();
+    say('Yaaay! that command works!');
+  } catch (error) {
+    console.log('err');
+    console.error(error);
+  }
+});
+app.message('hey', async ({ command, say }) => {
+  try {
     say('Yaaay! that command works!');
   } catch (error) {
     console.log('err');
