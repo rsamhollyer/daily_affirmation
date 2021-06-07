@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { App } = require('@slack/bolt');
+const instance = require('./config');
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -10,9 +11,13 @@ const app = new App({
 
 app.command('/affirm', async ({ command, ack, say }) => {
   try {
+    const {
+      data: { affirmation },
+    } = await instance();
+
     await ack();
 
-    say('Yaaay! that command works!');
+    say(`${affirmation}`);
   } catch (error) {
     console.log('err');
     console.error(error);
@@ -21,7 +26,10 @@ app.command('/affirm', async ({ command, ack, say }) => {
 
 app.message(/affirm/, async ({ command, say }) => {
   try {
-    say('Yaaay! that command works!');
+    const {
+      data: { affirmation },
+    } = await instance();
+    say(`${affirmation}`);
   } catch (error) {
     console.log('err');
     console.error(error);
