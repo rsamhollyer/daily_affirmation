@@ -17,6 +17,7 @@ app.command('/knowledge', async ({ command, ack, say }) => {
     console.error(error);
   }
 });
+
 app.message('hey', async ({ command, say }) => {
   try {
     say('Yaaay! that command works!');
